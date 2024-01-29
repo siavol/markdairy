@@ -5,12 +5,9 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  pull_request_review:
-    types: [submitted]
 
 jobs:
   test-with-emulator:
-    if: github.event.review.state == 'APPROVED'
     runs-on: ubuntu-latest
     strategy:
       matrix:
