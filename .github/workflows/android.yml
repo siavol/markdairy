@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  test-with-emulator:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -66,6 +66,13 @@ jobs:
 #          disable-animations: true
           script: ./gradlew connectedAndroidTest
 
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            app/build/test-results/**/*.xml
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -87,8 +94,21 @@ jobs:
       - name: Check for lint issues
         run: ./gradlew lint
 
+      - name: Upload lint results report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-results-debug
+          path: app/build/reports/lint-results-debug.html
+
       - name: Run tests
         run: ./gradlew test
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            app/build/test-results/**/*.xml
 
       - name: Build with Gradle
         run: ./gradlew build
