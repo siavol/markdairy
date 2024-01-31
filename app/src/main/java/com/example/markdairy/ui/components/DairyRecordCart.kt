@@ -1,4 +1,4 @@
-package com.example.markdairy.components
+package com.example.markdairy.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding

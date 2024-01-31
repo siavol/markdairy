@@ -1,4 +1,4 @@
-package com.example.markdairy.components
+package com.example.markdairy.ui.components
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
